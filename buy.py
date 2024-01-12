@@ -9,7 +9,7 @@ import time
 
 from common import *
 
-def buy():
+def buy(config:dict):
     try:
         with uc.Chrome() as driver:
             driver.get(PRODUCT_URL)
@@ -24,31 +24,31 @@ def buy():
             btn.click() # as guest
             # fill form
             text = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "billingName1")))
-            text.send_keys(FIRST_NAME)
+            text.send_keys(config.get('first_name'))
             text = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "billingName2")))
-            text.send_keys(LAST_NAME)
+            text.send_keys(config.get('last_name'))
             text = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "billingAddress1")))
-            text.send_keys(ADDRESS_LINE_1 + " " + ADDRESS_LINE_2)
+            text.send_keys(config.get('address_line'))
             text = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "billingCity")))
-            text.send_keys(CITY)
+            text.send_keys(config.get('city'))
             text = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "billingPostalCode")))
-            text.send_keys(POSTAL)
+            text.send_keys(config.get('postal'))
             text = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "billingPhoneNumber")))
-            text.send_keys(PHONE_NUMBER)
+            text.send_keys(config.get('phone'))
             text = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "email")))
-            text.send_keys(EMAIL)
+            text.send_keys(config.get('email'))
             text = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "verEmail")))
-            text.send_keys(EMAIL)
+            text.send_keys(config.get('email'))
             text = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "ccNum")))
-            text.send_keys(CARD_NUMBER)
+            text.send_keys(config.get('card'))
             text = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "cardSecurityCode")))
-            text.send_keys(CCV)
+            text.send_keys(config.get('ccv'))
             select = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "billingState")))
-            Select(select).select_by_value(STATE)
+            Select(select).select_by_value(config.get('state'))
             select = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "expirationDateMonth")))
-            Select(select).select_by_value(MONTH)
+            Select(select).select_by_value(config.get('month'))
             select = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "expirationDateYear")))
-            Select(select).select_by_value(YEAR)
+            Select(select).select_by_value(config.get('year'))
             print("form filled")
             # submit
             button_selector = "input.dr_button[value='Review Order']"

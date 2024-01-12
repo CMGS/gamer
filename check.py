@@ -5,7 +5,7 @@ import time
 from buy import buy
 from common import *
 
-def check_and_buy():
+def check_and_buy(config:dict):
 # 设置 URL 和 headers
     headers = {
         'authority': 'api.store.nvidia.com',
@@ -30,12 +30,11 @@ def check_and_buy():
             data = response.json()
             sku = data.get('listMap').pop()
             print(sku)
-
             if sku.get('is_active') == 'false':
                 print("no stock.")
             else:
                 print("buy.")
-                buy()
+                buy(config)
         except:
             print("error")
         time.sleep(15)
