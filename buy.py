@@ -44,7 +44,7 @@ def buy():
             text = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "cardSecurityCode")))
             text.send_keys(CCV)
             select = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "billingState")))
-            Select(select).select_by_value("OR")
+            Select(select).select_by_value(STATE)
             select = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "expirationDateMonth")))
             Select(select).select_by_value(MONTH)
             select = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "expirationDateYear")))
